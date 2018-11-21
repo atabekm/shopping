@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.shopping.R
 import com.example.shopping.domain.model.Product
@@ -11,6 +12,7 @@ import com.example.shopping.presentation.toCurrency
 
 class ProductAdapter : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
     private lateinit var productList: List<Product>
+    lateinit var addToCartCallback: (Product) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false)
@@ -33,6 +35,9 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() 
             view.findViewById<TextView>(R.id.product_title).text = product.title
             view.findViewById<TextView>(R.id.product_description).text = product.description
             view.findViewById<TextView>(R.id.product_price).text = product.price.toCurrency()
+            view.findViewById<ImageView>(R.id.product_cart).setOnClickListener {
+                addToCartCallback.invoke(product)
+            }
         }
     }
 }

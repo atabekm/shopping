@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity(), MainView {
         productRecycler.layoutManager = LinearLayoutManager(this)
         productRecycler.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         productRecycler.adapter = adapter
+        adapter.addToCartCallback = { product: Product -> presenter.addToCart(product) }
     }
 
     override fun onStart() {
