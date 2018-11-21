@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ListItem">
+        <item name="android:textColor">@android:color/secondary_text_light</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ListItem.Bold">
+        <item name="android:textColor">@android:color/primary_text_light</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ListItem.Bold.Price">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+    </style>
+
 </resources>

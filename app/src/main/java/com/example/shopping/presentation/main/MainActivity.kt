@@ -2,13 +2,17 @@ package com.example.shopping.presentation.main
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
+import android.widget.Toast
 import com.example.shopping.R
 import com.example.shopping.ShoppingApp
 import com.example.shopping.domain.model.Product
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainView {
+    private val adapter = ProductAdapter()
 
     @Inject lateinit var presenter: MainPresenter
 
@@ -16,6 +20,10 @@ class MainActivity : AppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         (application as ShoppingApp).component.inject(this)
+
+        productRecycler.layoutManager = LinearLayoutManager(this)
+        productRecycler.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        productRecycler.adapter = adapter
     }
 
     override fun onStart() {
@@ -30,10 +38,10 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun updateProducts(products: List<Product>) {
-        Log.d("mytest", "product size: " + products.size)
+        adapter.setData(products)
     }
 
     override fun errorRetrieving(message: String?) {
-        Log.e("mytest", "Error retrieving products: $message")
+        Toast.makeText(this, "Error retrieving products: $message", Toast.LENGTH_LONG).show()
     }
 }
