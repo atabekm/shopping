@@ -11,7 +11,7 @@ import com.example.shopping.domain.model.Product
 import com.example.shopping.presentation.toCurrency
 
 class ProductAdapter : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
-    private lateinit var productList: List<Product>
+    private var productList: List<Product> = listOf()
     lateinit var addToCartCallback: (Product) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {

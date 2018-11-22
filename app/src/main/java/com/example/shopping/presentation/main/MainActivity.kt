@@ -1,17 +1,18 @@
 package com.example.shopping.presentation.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.example.shopping.R
 import com.example.shopping.ShoppingApp
 import com.example.shopping.domain.model.Product
+import com.example.shopping.presentation.cart.CartActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -48,19 +49,10 @@ class MainActivity : AppCompatActivity(), MainView {
 
         val cartMenu = menu.findItem(R.id.menu_cart)
         val root = cartMenu.actionView
+        root.setOnClickListener { startActivity(Intent(this, CartActivity::class.java)) }
         badgeCounter = root.findViewById(R.id.cart_badge_counter)
 
         return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_cart -> {
-                Toast.makeText(this, "Show cart", Toast.LENGTH_LONG).show()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     override fun updateProducts(products: List<Product>) {

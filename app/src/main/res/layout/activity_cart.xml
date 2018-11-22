@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/cartRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/bottom_cart_section"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_cart_section"
+        android:layout_gravity="bottom"
+        android:padding="@dimen/standard_margin_half"
+        android:background="@android:color/darker_gray">
+
+        <TextView
+            android:id="@+id/cart_total_price_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/total_price"/>
+
+        <TextView
+            android:id="@+id/cart_total_price_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cart_total_price_header"
+            tools:text="$234.00"/>
+
+        <Button
+            android:id="@+id/cart_buy_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="@string/buy"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

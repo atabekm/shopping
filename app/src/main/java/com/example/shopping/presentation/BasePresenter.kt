@@ -1,4 +1,4 @@
-package com.example.shopping.presentation.base
+package com.example.shopping.presentation
 
 interface BasePresenter<T> {
     fun attach(view: T)

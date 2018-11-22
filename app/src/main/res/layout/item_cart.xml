@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/standard_margin">
+
+    <TextView
+        android:id="@+id/cart_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Nintendo Switch"
+        style="@style/ListItem.Bold"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_more_vert_black_24dp"/>
+
+    <TextView
+        android:id="@+id/cart_item_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cart_item_title"
+        android:maxLines="1"
+        android:ellipsize="end"
+        style="@style/ListItem"
+        tools:text="Play your favourite games anytime, anywhere, with anyone, with Nintendo Switch"/>
+
+    <TextView
+        android:id="@+id/cart_item_quantity_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cart_item_description"
+        android:text="@string/quantity"
+        style="@style/ListItem"/>
+
+    <ImageView
+        android:id="@+id/cart_item_decrease_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/cart_item_quantity_title"
+        android:layout_below="@id/cart_item_description"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:src="@drawable/ic_remove_black_24dp"/>
+
+    <TextView
+        android:id="@+id/cart_item_quantity_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cart_item_description"
+        android:layout_marginStart="@dimen/standard_margin_half"
+        android:layout_marginEnd="@dimen/standard_margin_half"
+        android:layout_toEndOf="@id/cart_item_decrease_count"
+        android:text="@string/one"
+        style="@style/ListItem"/>
+
+    <ImageView
+        android:id="@+id/cart_item_increase_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/cart_item_quantity_count"
+        android:layout_below="@id/cart_item_description"
+        android:src="@drawable/ic_add_black_24dp"/>
+
+    <TextView
+        android:id="@+id/cart_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cart_item_description"
+        android:layout_alignParentEnd="true"
+        style="@style/ListItem.Bold.Price"
+        tools:text="$2,354.00"/>
+
+</RelativeLayout>

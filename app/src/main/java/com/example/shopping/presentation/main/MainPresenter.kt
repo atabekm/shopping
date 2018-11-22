@@ -5,7 +5,7 @@ import com.example.shopping.domain.model.Product
 import com.example.shopping.domain.usecase.cart.AddToCartUseCase
 import com.example.shopping.domain.usecase.cart.GetCartProductsUseCase
 import com.example.shopping.domain.usecase.product.GetProductsUseCase
-import com.example.shopping.presentation.base.BasePresenter
+import com.example.shopping.presentation.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -32,7 +32,7 @@ class MainPresenter(
     override fun detach() {
         this.view = null
 
-        subscription.dispose()
+        subscription.clear()
     }
 
     fun addToCart(product: Product) {

@@ -6,4 +6,5 @@
     <dimen name="menu_size">52dp</dimen>
     <dimen name="badge_text_size">10sp</dimen>
     <dimen name="badge_margin">4dp</dimen>
+    <dimen name="bottom_cart_section">60dp</dimen>
 </resources>
