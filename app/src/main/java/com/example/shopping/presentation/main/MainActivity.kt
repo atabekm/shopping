@@ -4,6 +4,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import com.example.shopping.R
 import com.example.shopping.ShoppingApp
@@ -12,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainView {
+    private lateinit var badgeCounter: TextView
     private val adapter = ProductAdapter()
 
     @Inject lateinit var presenter: MainPresenter
@@ -38,11 +43,40 @@ class MainActivity : AppCompatActivity(), MainView {
         super.onStop()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+
+        val cartMenu = menu.findItem(R.id.menu_cart)
+        val root = cartMenu.actionView
+        badgeCounter = root.findViewById(R.id.cart_badge_counter)
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_cart -> {
+                Toast.makeText(this, "Show cart", Toast.LENGTH_LONG).show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun updateProducts(products: List<Product>) {
         adapter.setData(products)
     }
 
     override fun errorRetrieving(message: String?) {
         Toast.makeText(this, "Error retrieving products: $message", Toast.LENGTH_LONG).show()
+    }
+
+    override fun updateCartCount(count: Int) {
+        if (count == 0) {
+            badgeCounter.visibility = View.GONE
+        } else {
+            badgeCounter.visibility = View.VISIBLE
+            badgeCounter.text = "$count"
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.shopping.presentation.main
 
-import android.util.Log
 import com.example.shopping.domain.model.Cart
 import com.example.shopping.domain.model.Product
 import com.example.shopping.domain.usecase.cart.AddToCartUseCase
@@ -33,7 +32,11 @@ class MainPresenter(
     override fun detach() {
         this.view = null
 
-        subscription.clear()
+        subscription.dispose()
+    }
+
+    fun addToCart(product: Product) {
+        addToCartUseCase.execute(product)
     }
 
     fun fetchProducts() {
@@ -53,12 +56,8 @@ class MainPresenter(
         view?.errorRetrieving(throwable.message)
     }
 
-    fun addToCart(product: Product) {
-        addToCartUseCase.execute(product)
-    }
-
     private fun observeCart(carts: List<Cart>) {
-        Log.d("mytest", "cart size: ${carts.size}")
+        view?.updateCartCount(carts.size)
     }
 
 }
