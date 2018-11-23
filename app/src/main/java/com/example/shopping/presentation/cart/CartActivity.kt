@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.view.MenuItem
 import android.widget.Toast
 import com.example.shopping.R
 import com.example.shopping.ShoppingApp
@@ -21,6 +22,10 @@ class CartActivity : AppCompatActivity(), CartView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
         (application as ShoppingApp).component.inject(this)
+
+        if (supportActionBar != null) {
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
 
         cartRecycler.layoutManager = LinearLayoutManager(this)
         cartRecycler.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
@@ -40,6 +45,16 @@ class CartActivity : AppCompatActivity(), CartView {
     override fun onStop() {
         presenter.detach()
         super.onStop()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun updateCart(carts: List<Cart>) {
