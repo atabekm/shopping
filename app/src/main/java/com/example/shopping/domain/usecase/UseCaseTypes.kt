@@ -3,6 +3,9 @@ package com.example.shopping.domain.usecase
 import io.reactivex.Observable
 import io.reactivex.Single
 
+interface UseCase {
+    fun execute()
+}
 interface UseCaseWithParameters<P, R> {
     fun execute(parameter: P) : R
 }

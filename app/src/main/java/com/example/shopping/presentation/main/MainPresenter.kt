@@ -2,8 +2,9 @@ package com.example.shopping.presentation.main
 
 import com.example.shopping.domain.model.Cart
 import com.example.shopping.domain.model.Product
-import com.example.shopping.domain.usecase.cart.IncreaseCountUseCase
+import com.example.shopping.domain.usecase.cart.ClearCartUseCase
 import com.example.shopping.domain.usecase.cart.GetCartProductsUseCase
+import com.example.shopping.domain.usecase.cart.IncreaseCountUseCase
 import com.example.shopping.domain.usecase.product.GetProductsUseCase
 import com.example.shopping.presentation.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,7 +14,8 @@ import io.reactivex.schedulers.Schedulers
 class MainPresenter(
     private val getProductsUseCase: GetProductsUseCase,
     private val increaseCountUseCase: IncreaseCountUseCase,
-    private val getCartProductsUseCase: GetCartProductsUseCase
+    private val getCartProductsUseCase: GetCartProductsUseCase,
+    private val clearCartUseCase: ClearCartUseCase
 ) : BasePresenter<MainView> {
     private var view: MainView? = null
     private val subscription = CompositeDisposable()
@@ -33,6 +35,10 @@ class MainPresenter(
         this.view = null
 
         subscription.clear()
+    }
+
+    fun clearCarts() {
+        clearCartUseCase.execute()
     }
 
     fun addToCart(product: Product) {

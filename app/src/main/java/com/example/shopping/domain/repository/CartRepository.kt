@@ -9,4 +9,5 @@ interface CartRepository {
     fun decreaseProductCount(product: Product)
     fun removeFromCart(product: Product)
     fun getProductsInCart(): Observable<List<Cart>>
+    fun clearCart()
 }

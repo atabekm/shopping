@@ -44,6 +44,11 @@ class MainActivity : AppCompatActivity(), MainView {
         super.onStop()
     }
 
+    override fun onDestroy() {
+        presenter.clearCarts()
+        super.onDestroy()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
 

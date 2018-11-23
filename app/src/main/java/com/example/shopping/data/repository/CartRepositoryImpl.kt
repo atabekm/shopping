@@ -39,4 +39,8 @@ class CartRepositoryImpl : CartRepository {
 
     override fun getProductsInCart(): Observable<List<Cart>> = subject
 
+    override fun clearCart() {
+        carts.clear()
+        subject.onNext(carts.values.toList())
+    }
 }

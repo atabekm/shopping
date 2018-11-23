@@ -7,35 +7,35 @@
     android:padding="@dimen/standard_margin">
 
     <TextView
-        android:id="@+id/product_title"
+        android:id="@+id/productTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@id/product_price"
+        android:layout_toStartOf="@id/productPrice"
         style="@style/ListItem.Bold"/>
 
     <TextView
-        android:id="@+id/product_description"
+        android:id="@+id/productDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/standard_margin_half"
-        android:layout_below="@id/product_title"
-        android:layout_toStartOf="@+id/product_cart"
+        android:layout_below="@id/productTitle"
+        android:layout_toStartOf="@+id/productCart"
         style="@style/ListItem"/>
 
     <TextView
-        android:id="@+id/product_price"
+        android:id="@+id/productPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         style="@style/ListItem.Bold.Price"/>
 
     <ImageView
-        android:id="@+id/product_cart"
+        android:id="@+id/productCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_price"
+        android:layout_below="@id/productPrice"
         android:layout_alignParentEnd="true"
         android:padding="@dimen/standard_margin"
-        android:src="@drawable/ic_add_shopping_cart_black_24dp"/>
+        android:src="@drawable/add_cart"/>
 
 </RelativeLayout>
