@@ -5,6 +5,7 @@ import com.example.shopping.domain.usecase.cart.AddToCartUseCase
 import com.example.shopping.domain.usecase.cart.GetCartProductsUseCase
 import com.example.shopping.domain.usecase.cart.RemoveFromCartUseCase
 import com.example.shopping.presentation.BasePresenter
+import com.example.shopping.presentation.toCurrency
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -23,7 +24,7 @@ class CartPresenter(
         subscription.add(getCartProductsUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(this::updateCart, this::error))
+            .subscribe(this::updateData, this::error))
     }
 
     override fun detach() {
@@ -32,8 +33,23 @@ class CartPresenter(
         subscription.clear()
     }
 
+    private fun updateData(carts: List<Cart>) {
+        updateCart(carts)
+        updatePrice(carts)
+    }
+
     private fun updateCart(carts: List<Cart>) {
         view?.updateCart(carts)
+    }
+
+    private fun updatePrice(carts: List<Cart>) {
+        var totalPrice = 0f
+        for (cart in carts) {
+            val price = cart.count * cart.product.price
+            totalPrice += price
+        }
+
+        view?.updateTotalPrice(totalPrice.toCurrency())
     }
 
     private fun error(throwable: Throwable) {

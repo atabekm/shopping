@@ -40,6 +40,10 @@ class CartActivity : AppCompatActivity(), CartView {
         adapter.setData(carts)
     }
 
+    override fun updateTotalPrice(price: String) {
+        cartTotalPriceAmount.text = price
+    }
+
     override fun error(message: String?) {
         Toast.makeText(this, "Error retrieving cart: $message", Toast.LENGTH_LONG).show()
     }
