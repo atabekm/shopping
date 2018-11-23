@@ -64,7 +64,7 @@ class CartPresenter(
     private fun updatePrice(carts: List<Cart>) {
         var totalPrice = 0f
         for (cart in carts) {
-            val price = cart.count * cart.product.price
+            val price = cart.count * cart.product.getNewPrice()
             totalPrice += price
         }
 

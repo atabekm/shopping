@@ -1,5 +1,6 @@
 package com.example.shopping.presentation.cart
 
+import android.graphics.Paint
 import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import com.example.shopping.R
 import com.example.shopping.domain.model.Cart
 import com.example.shopping.presentation.toCurrency
+import com.example.shopping.presentation.visible
 import kotlinx.android.synthetic.main.item_cart.view.*
 
 class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
@@ -51,7 +53,10 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
             view.cartItemTitle.text = cart.product.title
             view.cartItemDescription.text = cart.product.description
-            view.cartItemPrice.text = cart.product.price.toCurrency()
+            view.cartItemPriceOld.paintFlags = view.cartItemPriceOld.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            view.cartItemPriceOld.text = cart.product.getOldPrice().toCurrency()
+            view.cartItemPriceOld.visible(cart.product.getOldPrice() > 0)
+            view.cartItemPriceNew.text = cart.product.getNewPrice().toCurrency()
             view.cartItemQuantityCount.text = cart.count.toString()
             view.cartItemDecreaseCount.isEnabled = cart.count > 1
             view.cartItemDecreaseCount.setOnClickListener{
