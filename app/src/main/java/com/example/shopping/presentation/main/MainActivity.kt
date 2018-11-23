@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainView {
-    private lateinit var badgeCounter: TextView
+    private var badgeCounter: TextView? = null
     private val adapter = ProductAdapter()
 
     @Inject lateinit var presenter: MainPresenter
@@ -65,10 +65,10 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun updateCartCount(count: Int) {
         if (count == 0) {
-            badgeCounter.visibility = View.GONE
+            badgeCounter?.visibility = View.GONE
         } else {
-            badgeCounter.visibility = View.VISIBLE
-            badgeCounter.text = "$count"
+            badgeCounter?.visibility = View.VISIBLE
+            badgeCounter?.text = "$count"
         }
     }
 }

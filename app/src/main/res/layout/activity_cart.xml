@@ -40,9 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:text="@string/buy"
-            app:backgroundTint="@android:color/holo_green_dark"
-            style="@style/Widget.AppCompat.Button.Colored"/>
+            android:text="@string/buy"/>
 
     </RelativeLayout>
 

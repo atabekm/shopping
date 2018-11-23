@@ -33,9 +33,18 @@ class CartPresenter(
         subscription.clear()
     }
 
+    fun addToCart(cart: Cart) {
+        addToCartUseCase.execute(cart.product)
+    }
+
+    fun removeFromCart(cart: Cart) {
+        removeFromCartUseCase.execute(cart.product)
+    }
+
     private fun updateData(carts: List<Cart>) {
         updateCart(carts)
         updatePrice(carts)
+        updateButton(carts)
     }
 
     private fun updateCart(carts: List<Cart>) {
@@ -50,6 +59,10 @@ class CartPresenter(
         }
 
         view?.updateTotalPrice(totalPrice.toCurrency())
+    }
+
+    private fun updateButton(carts: List<Cart>) {
+        view?.updateButtonEnabled(carts.sumBy { it.count } > 0)
     }
 
     private fun error(throwable: Throwable) {

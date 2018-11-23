@@ -24,6 +24,9 @@ class CartActivity : AppCompatActivity(), CartView {
         cartRecycler.layoutManager = LinearLayoutManager(this)
         cartRecycler.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         cartRecycler.adapter = adapter
+
+        adapter.increaseCountCallback = { presenter.addToCart(it) }
+        adapter.decreaseCountCallback = { presenter.removeFromCart(it) }
     }
 
     override fun onStart() {
@@ -42,6 +45,10 @@ class CartActivity : AppCompatActivity(), CartView {
 
     override fun updateTotalPrice(price: String) {
         cartTotalPriceAmount.text = price
+    }
+
+    override fun updateButtonEnabled(enabled: Boolean) {
+        cartBuyButton.isEnabled = enabled
     }
 
     override fun error(message: String?) {

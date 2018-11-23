@@ -8,7 +8,7 @@ import io.reactivex.subjects.BehaviorSubject
 
 class CartRepositoryImpl : CartRepository {
     private val carts: HashMap<Int, Cart> = HashMap()
-    private val subject: BehaviorSubject<List<Cart>> = BehaviorSubject.create()
+    private val subject: BehaviorSubject<List<Cart>> = BehaviorSubject.createDefault(listOf())
 
     override fun addToCart(product: Product) {
         val cart = carts[product.id]
