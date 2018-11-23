@@ -2,6 +2,7 @@ package com.example.shopping.presentation.cart
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
@@ -23,10 +24,12 @@ class CartActivity : AppCompatActivity(), CartView {
 
         cartRecycler.layoutManager = LinearLayoutManager(this)
         cartRecycler.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        cartRecycler.itemAnimator = DefaultItemAnimator()
         cartRecycler.adapter = adapter
 
-        adapter.increaseCountCallback = { presenter.addToCart(it) }
-        adapter.decreaseCountCallback = { presenter.removeFromCart(it) }
+        adapter.increaseCountCallback = { presenter.increaseProductCount(it) }
+        adapter.decreaseCountCallback = { presenter.decreaseProductCount(it) }
+        adapter.cartMenuCallback = { presenter.removeFromCart(it) }
     }
 
     override fun onStart() {

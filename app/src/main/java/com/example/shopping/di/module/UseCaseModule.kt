@@ -2,8 +2,9 @@ package com.example.shopping.di.module
 
 import com.example.shopping.domain.repository.CartRepository
 import com.example.shopping.domain.repository.ProductRepository
-import com.example.shopping.domain.usecase.cart.AddToCartUseCase
+import com.example.shopping.domain.usecase.cart.DecreaseCountUseCase
 import com.example.shopping.domain.usecase.cart.GetCartProductsUseCase
+import com.example.shopping.domain.usecase.cart.IncreaseCountUseCase
 import com.example.shopping.domain.usecase.cart.RemoveFromCartUseCase
 import com.example.shopping.domain.usecase.product.GetProductsUseCase
 import dagger.Module
@@ -19,14 +20,19 @@ class UseCaseModule {
 
     @Singleton
     @Provides
-    fun providesAddToCartUseCase(repository: CartRepository) = AddToCartUseCase(repository)
+    fun providesIncreaseCountUseCase(repository: CartRepository) = IncreaseCountUseCase(repository)
 
     @Singleton
     @Provides
-    fun providesRemoveFromCartUseCase(repository: CartRepository) = RemoveFromCartUseCase(repository)
+    fun providesDecreaseCountUseCase(repository: CartRepository) = DecreaseCountUseCase(repository)
 
     @Singleton
     @Provides
     fun providesGetCartProductsUseCase(repository: CartRepository) = GetCartProductsUseCase(repository)
+
+
+    @Singleton
+    @Provides
+    fun providesRemoveFromCartUseCase(repository: CartRepository) = RemoveFromCartUseCase(repository)
 
 }

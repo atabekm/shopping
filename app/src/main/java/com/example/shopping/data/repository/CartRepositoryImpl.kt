@@ -10,7 +10,7 @@ class CartRepositoryImpl : CartRepository {
     private val carts: HashMap<Int, Cart> = HashMap()
     private val subject: BehaviorSubject<List<Cart>> = BehaviorSubject.createDefault(listOf())
 
-    override fun addToCart(product: Product) {
+    override fun increaseProductCount(product: Product) {
         val cart = carts[product.id]
         if (cart == null) {
             carts[product.id] = Cart(1, product)
@@ -20,7 +20,7 @@ class CartRepositoryImpl : CartRepository {
         subject.onNext(carts.values.toList())
     }
 
-    override fun removeFromCart(product: Product) {
+    override fun decreaseProductCount(product: Product) {
         val cart = carts[product.id]
         if (cart != null) {
             if (cart.count > 0) {
@@ -29,6 +29,11 @@ class CartRepositoryImpl : CartRepository {
                 carts.remove(product.id)
             }
         }
+        subject.onNext(carts.values.toList())
+    }
+
+    override fun removeFromCart(product: Product) {
+        carts.remove(product.id)
         subject.onNext(carts.values.toList())
     }
 

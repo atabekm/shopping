@@ -1,8 +1,9 @@
 package com.example.shopping.presentation.cart
 
 import com.example.shopping.domain.model.Cart
-import com.example.shopping.domain.usecase.cart.AddToCartUseCase
+import com.example.shopping.domain.usecase.cart.DecreaseCountUseCase
 import com.example.shopping.domain.usecase.cart.GetCartProductsUseCase
+import com.example.shopping.domain.usecase.cart.IncreaseCountUseCase
 import com.example.shopping.domain.usecase.cart.RemoveFromCartUseCase
 import com.example.shopping.presentation.BasePresenter
 import com.example.shopping.presentation.toCurrency
@@ -11,7 +12,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class CartPresenter(
-    private val addToCartUseCase: AddToCartUseCase,
+    private val increaseCountUseCase: IncreaseCountUseCase,
+    private val decreaseCountUseCase: DecreaseCountUseCase,
     private val removeFromCartUseCase: RemoveFromCartUseCase,
     private val getCartProductsUseCase: GetCartProductsUseCase
 ) : BasePresenter<CartView> {
@@ -33,8 +35,12 @@ class CartPresenter(
         subscription.clear()
     }
 
-    fun addToCart(cart: Cart) {
-        addToCartUseCase.execute(cart.product)
+    fun increaseProductCount(cart: Cart) {
+        increaseCountUseCase.execute(cart.product)
+    }
+
+    fun decreaseProductCount(cart: Cart) {
+        decreaseCountUseCase.execute(cart.product)
     }
 
     fun removeFromCart(cart: Cart) {

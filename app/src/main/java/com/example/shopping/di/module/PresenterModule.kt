@@ -1,7 +1,8 @@
 package com.example.shopping.di.module
 
-import com.example.shopping.domain.usecase.cart.AddToCartUseCase
+import com.example.shopping.domain.usecase.cart.DecreaseCountUseCase
 import com.example.shopping.domain.usecase.cart.GetCartProductsUseCase
+import com.example.shopping.domain.usecase.cart.IncreaseCountUseCase
 import com.example.shopping.domain.usecase.cart.RemoveFromCartUseCase
 import com.example.shopping.domain.usecase.product.GetProductsUseCase
 import com.example.shopping.presentation.cart.CartPresenter
@@ -17,16 +18,17 @@ class PresenterModule {
     @Provides
     fun providesMainPresenter(
         getProductsUseCase: GetProductsUseCase,
-        addToCartUseCase: AddToCartUseCase,
+        increaseCountUseCase: IncreaseCountUseCase,
         getCartProductsUseCase: GetCartProductsUseCase
-    ) = MainPresenter(getProductsUseCase, addToCartUseCase, getCartProductsUseCase)
+    ) = MainPresenter(getProductsUseCase, increaseCountUseCase, getCartProductsUseCase)
 
     @Singleton
     @Provides
     fun providesCartPresenter(
-        addToCartUseCase: AddToCartUseCase,
+        increaseCountUseCase: IncreaseCountUseCase,
+        decreaseCountUseCase: DecreaseCountUseCase,
         removeFromCartUseCase: RemoveFromCartUseCase,
         getCartProductsUseCase: GetCartProductsUseCase
-    ) = CartPresenter(addToCartUseCase, removeFromCartUseCase, getCartProductsUseCase)
+    ) = CartPresenter(increaseCountUseCase, decreaseCountUseCase, removeFromCartUseCase, getCartProductsUseCase)
 
 }

@@ -5,7 +5,8 @@ import com.example.shopping.domain.model.Product
 import io.reactivex.Observable
 
 interface CartRepository {
-    fun addToCart(product: Product)
+    fun increaseProductCount(product: Product)
+    fun decreaseProductCount(product: Product)
     fun removeFromCart(product: Product)
     fun getProductsInCart(): Observable<List<Cart>>
 }

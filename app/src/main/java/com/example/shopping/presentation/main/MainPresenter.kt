@@ -2,7 +2,7 @@ package com.example.shopping.presentation.main
 
 import com.example.shopping.domain.model.Cart
 import com.example.shopping.domain.model.Product
-import com.example.shopping.domain.usecase.cart.AddToCartUseCase
+import com.example.shopping.domain.usecase.cart.IncreaseCountUseCase
 import com.example.shopping.domain.usecase.cart.GetCartProductsUseCase
 import com.example.shopping.domain.usecase.product.GetProductsUseCase
 import com.example.shopping.presentation.BasePresenter
@@ -12,7 +12,7 @@ import io.reactivex.schedulers.Schedulers
 
 class MainPresenter(
     private val getProductsUseCase: GetProductsUseCase,
-    private val addToCartUseCase: AddToCartUseCase,
+    private val increaseCountUseCase: IncreaseCountUseCase,
     private val getCartProductsUseCase: GetCartProductsUseCase
 ) : BasePresenter<MainView> {
     private var view: MainView? = null
@@ -36,7 +36,7 @@ class MainPresenter(
     }
 
     fun addToCart(product: Product) {
-        addToCartUseCase.execute(product)
+        increaseCountUseCase.execute(product)
     }
 
     fun fetchProducts() {
