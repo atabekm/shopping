@@ -6,5 +6,6 @@ interface CartView {
     fun updateCart(carts: List<Cart>)
     fun updateTotalPrice(price: String)
     fun updateButtonEnabled(enabled: Boolean)
-    fun error(message: String?)
+    fun showMessage(message: String?)
+    fun close()
 }

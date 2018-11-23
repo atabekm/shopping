@@ -30,6 +30,11 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() 
         notifyDataSetChanged()
     }
 
+    fun resetCartButtonState() {
+        addToCartArray.clear()
+        notifyDataSetChanged()
+    }
+
     inner class ProductViewHolder(val view: View): RecyclerView.ViewHolder(view) {
         fun bind(product: Product) {
             view.productTitle.text = product.title

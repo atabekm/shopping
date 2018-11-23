@@ -1,10 +1,7 @@
 package com.example.shopping.presentation.cart
 
 import com.example.shopping.domain.model.Cart
-import com.example.shopping.domain.usecase.cart.DecreaseCountUseCase
-import com.example.shopping.domain.usecase.cart.GetCartProductsUseCase
-import com.example.shopping.domain.usecase.cart.IncreaseCountUseCase
-import com.example.shopping.domain.usecase.cart.RemoveFromCartUseCase
+import com.example.shopping.domain.usecase.cart.*
 import com.example.shopping.presentation.BasePresenter
 import com.example.shopping.presentation.toCurrency
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,7 +12,8 @@ class CartPresenter(
     private val increaseCountUseCase: IncreaseCountUseCase,
     private val decreaseCountUseCase: DecreaseCountUseCase,
     private val removeFromCartUseCase: RemoveFromCartUseCase,
-    private val getCartProductsUseCase: GetCartProductsUseCase
+    private val getCartProductsUseCase: GetCartProductsUseCase,
+    private val clearCartUseCase: ClearCartUseCase
 ) : BasePresenter<CartView> {
     private var view: CartView? = null
     private val subscription = CompositeDisposable()
@@ -47,6 +45,12 @@ class CartPresenter(
         removeFromCartUseCase.execute(cart.product)
     }
 
+    fun initiatePurchase() {
+        clearCartUseCase.execute()
+        view?.close()
+        view?.showMessage("Purchased successfully")
+    }
+
     private fun updateData(carts: List<Cart>) {
         updateCart(carts)
         updatePrice(carts)
@@ -72,7 +76,7 @@ class CartPresenter(
     }
 
     private fun error(throwable: Throwable) {
-        view?.error(throwable.localizedMessage)
+        view?.showMessage("Error retrieving cart: ${throwable.localizedMessage}")
     }
 
 }

@@ -26,7 +26,8 @@ class PresenterModule {
         increaseCountUseCase: IncreaseCountUseCase,
         decreaseCountUseCase: DecreaseCountUseCase,
         removeFromCartUseCase: RemoveFromCartUseCase,
-        getCartProductsUseCase: GetCartProductsUseCase
-    ) = CartPresenter(increaseCountUseCase, decreaseCountUseCase, removeFromCartUseCase, getCartProductsUseCase)
+        getCartProductsUseCase: GetCartProductsUseCase,
+        clearCartUseCase: ClearCartUseCase
+    ) = CartPresenter(increaseCountUseCase, decreaseCountUseCase, removeFromCartUseCase, getCartProductsUseCase, clearCartUseCase)
 
 }

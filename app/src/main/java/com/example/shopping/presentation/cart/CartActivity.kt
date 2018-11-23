@@ -1,6 +1,7 @@
 package com.example.shopping.presentation.cart
 
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
@@ -35,6 +36,19 @@ class CartActivity : AppCompatActivity(), CartView {
         adapter.increaseCountCallback = { presenter.increaseProductCount(it) }
         adapter.decreaseCountCallback = { presenter.decreaseProductCount(it) }
         adapter.cartMenuCallback = { presenter.removeFromCart(it) }
+
+        cartBuyButton.setOnClickListener {
+            val dialog: AlertDialog = AlertDialog.Builder(this)
+                .setMessage("Would you like to buy ${adapter.itemCount} items for ${cartTotalPriceAmount.text}?")
+                .setTitle(getString(R.string.confirm_purchase))
+                .setPositiveButton(R.string.yes) { _, _ ->
+                    presenter.initiatePurchase()
+                }
+                .setNegativeButton(R.string.no, null)
+                .create()
+
+            dialog.show()
+        }
     }
 
     override fun onStart() {
@@ -69,7 +83,11 @@ class CartActivity : AppCompatActivity(), CartView {
         cartBuyButton.isEnabled = enabled
     }
 
-    override fun error(message: String?) {
-        Toast.makeText(this, "Error retrieving cart: $message", Toast.LENGTH_LONG).show()
+    override fun showMessage(message: String?) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun close() {
+        finish()
     }
 }

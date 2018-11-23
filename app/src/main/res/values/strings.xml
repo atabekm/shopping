@@ -6,4 +6,7 @@
     <string name="quantity">Quantity:</string>
     <string name="one">1</string>
     <string name="remove_from_cart">Remove from cart</string>
+    <string name="confirm_purchase">Confirm your purchase</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

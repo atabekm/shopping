@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun updateCartCount(count: Int) {
         if (count == 0) {
+            adapter.resetCartButtonState()
             badgeCounter?.visibility = View.GONE
         } else {
             badgeCounter?.visibility = View.VISIBLE
