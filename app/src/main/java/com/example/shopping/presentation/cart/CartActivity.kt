@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.example.shopping.R
 import com.example.shopping.ShoppingApp
 import com.example.shopping.domain.model.Cart
+import com.example.shopping.presentation.visible
 import kotlinx.android.synthetic.main.activity_cart.*
 import javax.inject.Inject
 
@@ -82,6 +83,11 @@ class CartActivity : AppCompatActivity(), CartView {
 
     override fun updateButtonEnabled(enabled: Boolean) {
         cartBuyButton.isEnabled = enabled
+    }
+
+    override fun updateListVisibility(visible: Boolean) {
+        cartRecycler.visible(visible)
+        cartEmpty.visible(!visible)
     }
 
     override fun showMessage(message: String?) {

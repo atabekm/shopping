@@ -11,6 +11,7 @@
     <string name="no">No</string>
     <string name="sort_by">Sort by</string>
     <string name="shopping_cart">Shopping cart</string>
+    <string name="no_items_in_cart">No items in cart</string>
 
     <string-array name="sorter_types">
         <item>Default</item>

@@ -56,7 +56,7 @@ class CartPresenter(
     private fun updateData(carts: List<Cart>) {
         updateCart(carts)
         updatePrice(carts)
-        updateButton(carts)
+        updateCount(carts)
     }
 
     private fun updateCart(carts: List<Cart>) {
@@ -73,8 +73,10 @@ class CartPresenter(
         view?.updateTotalPrice(totalPrice.toCurrency())
     }
 
-    private fun updateButton(carts: List<Cart>) {
-        view?.updateButtonEnabled(carts.sumBy { it.count } > 0)
+    private fun updateCount(carts: List<Cart>) {
+        val count = carts.sumBy { it.count }
+        view?.updateButtonEnabled(count > 0)
+        view?.updateListVisibility(count > 0)
     }
 
     private fun error(throwable: Throwable) {

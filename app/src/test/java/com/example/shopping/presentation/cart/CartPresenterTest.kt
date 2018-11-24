@@ -71,6 +71,7 @@ class CartPresenterTest {
         verify(view, times(1)).updateCart(cartList)
         verify(view, times(1)).updateTotalPrice(product.price.toCurrency())
         verify(view, times(1)).updateButtonEnabled(cart.count > 0)
+        verify(view, times(1)).updateListVisibility(cart.count > 0)
         verifyNoMoreInteractions(view)
     }
 
