@@ -54,6 +54,7 @@ class CartActivity : AppCompatActivity(), CartView {
     override fun onStart() {
         super.onStart()
         presenter.attach(this)
+        presenter.subscribeToCartChanges()
     }
 
     override fun onStop() {

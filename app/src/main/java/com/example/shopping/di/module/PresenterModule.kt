@@ -1,5 +1,6 @@
 package com.example.shopping.di.module
 
+import com.example.shopping.di.SchedulerProvider
 import com.example.shopping.domain.usecase.cart.*
 import com.example.shopping.domain.usecase.product.GetProductsUseCase
 import com.example.shopping.presentation.cart.CartPresenter
@@ -17,8 +18,9 @@ class PresenterModule {
         getProductsUseCase: GetProductsUseCase,
         increaseCountUseCase: IncreaseCountUseCase,
         getCartProductsUseCase: GetCartProductsUseCase,
-        clearCartUseCase: ClearCartUseCase
-    ) = MainPresenter(getProductsUseCase, increaseCountUseCase, getCartProductsUseCase, clearCartUseCase)
+        clearCartUseCase: ClearCartUseCase,
+        scheduler: SchedulerProvider
+    ) = MainPresenter(getProductsUseCase, increaseCountUseCase, getCartProductsUseCase, clearCartUseCase, scheduler)
 
     @Singleton
     @Provides
@@ -27,7 +29,8 @@ class PresenterModule {
         decreaseCountUseCase: DecreaseCountUseCase,
         removeFromCartUseCase: RemoveFromCartUseCase,
         getCartProductsUseCase: GetCartProductsUseCase,
-        clearCartUseCase: ClearCartUseCase
-    ) = CartPresenter(increaseCountUseCase, decreaseCountUseCase, removeFromCartUseCase, getCartProductsUseCase, clearCartUseCase)
+        clearCartUseCase: ClearCartUseCase,
+        scheduler: SchedulerProvider
+    ) = CartPresenter(increaseCountUseCase, decreaseCountUseCase, removeFromCartUseCase, getCartProductsUseCase, clearCartUseCase, scheduler)
 
 }

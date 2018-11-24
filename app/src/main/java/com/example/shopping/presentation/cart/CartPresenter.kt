@@ -1,36 +1,38 @@
 package com.example.shopping.presentation.cart
 
+import com.example.shopping.di.SchedulerProvider
 import com.example.shopping.domain.model.Cart
 import com.example.shopping.domain.usecase.cart.*
 import com.example.shopping.presentation.BasePresenter
 import com.example.shopping.presentation.toCurrency
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
 class CartPresenter(
     private val increaseCountUseCase: IncreaseCountUseCase,
     private val decreaseCountUseCase: DecreaseCountUseCase,
     private val removeFromCartUseCase: RemoveFromCartUseCase,
     private val getCartProductsUseCase: GetCartProductsUseCase,
-    private val clearCartUseCase: ClearCartUseCase
+    private val clearCartUseCase: ClearCartUseCase,
+    private val scheduler: SchedulerProvider
 ) : BasePresenter<CartView> {
     private var view: CartView? = null
     private val subscription = CompositeDisposable()
 
     override fun attach(view: CartView) {
         this.view = view
-
-        subscription.add(getCartProductsUseCase.execute()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(this::updateData, this::error))
     }
 
     override fun detach() {
         this.view = null
 
         subscription.clear()
+    }
+
+    fun subscribeToCartChanges() {
+        subscription.add(getCartProductsUseCase.execute()
+            .subscribeOn(scheduler.io())
+            .observeOn(scheduler.ui())
+            .subscribe(this::updateData, this::error))
     }
 
     fun increaseProductCount(cart: Cart) {
