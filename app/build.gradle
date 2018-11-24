@@ -27,6 +27,7 @@ ext {
     rx_android_version = '2.1.0'
     dagger_version = '2.11'
     junit_version = '4.12'
+    mockito_kotlin_version = '2.0.0'
 }
 
 dependencies {
@@ -44,4 +45,5 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
     testImplementation "junit:junit:$junit_version"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version"
 }

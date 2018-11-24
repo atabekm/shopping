@@ -23,7 +23,7 @@ class CartRepositoryImpl : CartRepository {
     override fun decreaseProductCount(product: Product) {
         val cart = carts[product.id]
         if (cart != null) {
-            if (cart.count > 0) {
+            if (cart.count > 1) {
                 cart.count -= 1
             } else {
                 carts.remove(product.id)
