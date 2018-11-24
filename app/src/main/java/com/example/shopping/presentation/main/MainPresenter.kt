@@ -9,6 +9,7 @@ import com.example.shopping.domain.usecase.product.GetProductsUseCase
 import com.example.shopping.presentation.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.Observables
 import io.reactivex.schedulers.Schedulers
 
 class MainPresenter(
@@ -22,13 +23,6 @@ class MainPresenter(
 
     override fun attach(view: MainView) {
         this.view = view
-
-        subscription.add(
-            getCartProductsUseCase.execute()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::observeCart, this::failedToRetrieve)
-        )
     }
 
     override fun detach() {
@@ -47,23 +41,20 @@ class MainPresenter(
 
     fun fetchProducts() {
         subscription.add(
-            getProductsUseCase.execute()
+            Observables.combineLatest(getProductsUseCase.execute().toObservable(), getCartProductsUseCase.execute())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::returnProducts, this::failedToRetrieve)
         )
     }
 
-    private fun returnProducts(products: List<Product>) {
-        view?.updateProducts(products)
+    private fun returnProducts(pair: Pair<List<Product>, List<Cart>>) {
+        view?.updateProducts(pair.first, pair.second.map { it.product.id }.toList())
+        view?.updateCartCount(pair.second.size)
     }
 
     private fun failedToRetrieve(throwable: Throwable) {
         view?.errorRetrieving(throwable.message)
-    }
-
-    private fun observeCart(carts: List<Cart>) {
-        view?.updateCartCount(carts.size)
     }
 
 }

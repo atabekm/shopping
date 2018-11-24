@@ -9,4 +9,13 @@
     <string name="confirm_purchase">Confirm your purchase</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="sort_by">Sort by</string>
+
+    <string-array name="sorter_types">
+        <item>Default</item>
+        <item>Price (Low to High)</item>
+        <item>Price (High to Low)</item>
+        <item>Product (A-Z)</item>
+        <item>Product (Z-A)</item>
+    </string-array>
 </resources>

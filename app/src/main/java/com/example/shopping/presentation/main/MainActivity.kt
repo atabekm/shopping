@@ -19,6 +19,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), MainView {
     private var badgeCounter: TextView? = null
     private val adapter = ProductAdapter()
+    private var sortingIndex = 0
 
     @Inject lateinit var presenter: MainPresenter
 
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity(), MainView {
         productRecycler.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         productRecycler.adapter = adapter
         adapter.addToCartCallback = { product: Product -> presenter.addToCart(product) }
+        adapter.sortingIndexCallback = { index: Int -> sortingIndex = index }
     }
 
     override fun onStart() {
@@ -60,8 +62,8 @@ class MainActivity : AppCompatActivity(), MainView {
         return true
     }
 
-    override fun updateProducts(products: List<Product>) {
-        adapter.setData(products)
+    override fun updateProducts(products: List<Product>, cartIds: List<Int>) {
+        adapter.setData(products, cartIds, sortingIndex)
     }
 
     override fun errorRetrieving(message: String?) {
@@ -70,7 +72,6 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun updateCartCount(count: Int) {
         if (count == 0) {
-            adapter.resetCartButtonState()
             badgeCounter?.visibility = View.GONE
         } else {
             badgeCounter?.visibility = View.VISIBLE
